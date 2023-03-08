@@ -1,36 +1,71 @@
+// array productos
 
-// carrito de compras
-let productos = prompt("Agregue sus productos al carrito");
-let precioVelador = 5600;
-let precioJuegoDeSillas = 27880;
-let precioCuadro = 3000;
-let precioBiblioteca = 45900;
 
- const suma = (a,b) => a + b;
- let total = 0;
 
-while(productos != ""){
-    switch(productos){
-        case "velador":
-            alert(`Agrego velador al carrito`);
-           total = suma(total, precioVelador);
-          break;
-        case "juego de sillas":
-            alert(`Agrego juego de sillas al carrito`);
-             total = suma(total, precioJuegoDeSillas);
-            break;
-        case "cuadro":
-            alert(`Agrego cuadro al carrito`);
-            total = suma(total, precioCuadro);
-            break;
-        case "biblioteca":
-            alert(`Agrego biblioteca al carrito`);
-            total = suma(total, precioBiblioteca);
-            break;
-        default:
-            alert("Ese producto no se encuentra disponible");
-            break;
-    }
-    productos = prompt("Agregue sus productos al carrito");
+
+const productos = [
+    { numProd: 1, nombre: "velador", precio: 5600 },
+    { numProd: 2,nombre: "juego de mesa", precio: 27800 },
+    { numProd: 3, nombre: "cuadro", precio: 3000 },
+    { numProd: 4, nombre: "biblioteca",precio: 40000 }
+];
+const buscar = productos.find(item => item.nombre === "cuadro");
+console.log(buscar);
+
+const filtrar = productos.filter(item => item.precio <= 5600)
+console.log(filtrar)
+
+
+let carrito = [];
+
+let eleccion = prompt("Hola! Que desea comprar algún producto? OPCION 1: SI, OPCION 2: NO");
+
+while(eleccion != "si" && eleccion != "no"){
+    alert("Respuesta incorrecta. Ingrese 'si' o 'no'");
+    eleccion = prompt("Hola! Que desea comprar algún producto? OPCION 1: SI, OPCION 2: NO")
 }
-alert(`El total de su compra es ${total}`)
+if(eleccion === "si"){
+    alert("Bienvenido! A continuación le mostraremos nuestra lista de productos");
+    let productosElegidos = productos.map((producto) => producto.nombre + " " + "$" + producto.precio);
+    alert (productosElegidos.join( "---"));  
+}else if(eleccion === "no"){
+    alert("Gracias por visitarnos!")
+}
+
+
+
+while(eleccion != "no"){
+    let producto = prompt("Agregue un producto al carrito");
+    let precio = 0;
+
+    if(producto === "velador" || producto === "juego de mesa" || producto === "cuadro" || producto ==="biblioteca"){
+        switch(producto){
+            case "velador":
+                precio =  5600;
+                break;
+            case "juego de mesa":
+                precio = 27800;
+                break;
+            case "cuadro":
+                precio = 3000;
+                break;
+            case "biblioteca":
+                precio = 40000;
+                break; 
+                default: 
+                alert("Ese producto no existe");
+        }
+        let cantidad = parseInt(prompt("Cúantas unidades quiere llevar?"));
+        carrito.push({producto, cantidad, precio});
+    }
+  
+
+    eleccion = prompt("Desea seguir comprando?");
+};
+
+
+
+
+
+
+
